@@ -46,6 +46,15 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 uint32_t QEIReadRaw;
+float motor ;
+float setpoint ;
+float s = 0 ;
+float u = 0 ;
+float p = 0 ;
+float e = 0 ;
+float K_P = 10;
+float K_I = 5;
+float K_D = 1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -55,7 +64,7 @@ static void MX_USART2_UART_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
-
+void control();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -114,8 +123,26 @@ int main(void)
 	  static uint32_t timestamp =0;
 	  if (HAL_GetTick()>timestamp)
 	  {
-		  timestamp = HAL_GetTick() + 500;
-		  QEIReadRaw = __HAL_TIM_GET_COUNTER(&htim2) * 0.1171875 ; // change to degree
+		  timestamp = HAL_GetTick() + 10;
+
+		  control();
+
+		  if(QEIReadRaw < setpoint)
+		  {
+			  __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_2,u);
+		  }
+
+		  if(QEIReadRaw > setpoint)
+		  {
+			  __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,u);
+		  }
+
+		  if(QEIReadRaw == setpoint)
+		  {
+			  __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,0);
+			  __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_2,0);
+		  }
+
 	  }
 
   }
@@ -266,7 +293,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 0;
+  htim2.Init.Prescaler = 83;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 307199;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -363,7 +390,14 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void control()
+{
+	QEIReadRaw = __HAL_TIM_GET_COUNTER(&htim2) * 0.117185 ;
+	e = setpoint - QEIReadRaw;
+	s = s +e;
+	u = (K_P*e) + (K_I*s) + (K_D*(e-p));
+	p = e;
+};
 /* USER CODE END 4 */
 
 /**
