@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+// จินตนา
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
