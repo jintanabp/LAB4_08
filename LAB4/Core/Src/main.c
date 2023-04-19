@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-// จินตนา
+// �?ิ�?ต�?า
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -134,7 +134,7 @@ int main(void)
 
 		  if(QEIReadRaw > setpoint)
 		  {
-			  __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,u);
+			  __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,u*-1);
 		  }
 
 		  if(QEIReadRaw == setpoint)
@@ -293,7 +293,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 83;
+  htim2.Init.Prescaler = 0;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 307199;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

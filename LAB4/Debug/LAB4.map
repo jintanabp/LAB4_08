@@ -2816,20 +2816,19 @@ LOAD c:/st/stm32cubeide_1.11.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.ext
                 0x0000000008000ae4                __aeabi_idiv0
                 0x0000000008000ae4                __aeabi_ldiv0
  *(.text*)
- .text.main     0x0000000008000ae8      0x104 ./Core/Src/main.o
+ .text.main     0x0000000008000ae8      0x108 ./Core/Src/main.o
                 0x0000000008000ae8                main
  .text.SystemClock_Config
-                0x0000000008000bec       0xd4 ./Core/Src/main.o
-                0x0000000008000bec                SystemClock_Config
+                0x0000000008000bf0       0xd4 ./Core/Src/main.o
+                0x0000000008000bf0                SystemClock_Config
  .text.MX_TIM1_Init
-                0x0000000008000cc0      0x15c ./Core/Src/main.o
+                0x0000000008000cc4      0x15c ./Core/Src/main.o
  .text.MX_TIM2_Init
-                0x0000000008000e1c       0xa8 ./Core/Src/main.o
+                0x0000000008000e20       0xa8 ./Core/Src/main.o
  .text.MX_USART2_UART_Init
-                0x0000000008000ec4       0x54 ./Core/Src/main.o
+                0x0000000008000ec8       0x54 ./Core/Src/main.o
  .text.MX_GPIO_Init
-                0x0000000008000f18       0xdc ./Core/Src/main.o
- *fill*         0x0000000008000ff4        0x4 
+                0x0000000008000f1c       0xdc ./Core/Src/main.o
  .text.control  0x0000000008000ff8       0xe8 ./Core/Src/main.o
                 0x0000000008000ff8                control
  .text.Error_Handler
